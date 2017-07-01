@@ -1,11 +1,11 @@
-#LEARNING METEOR AND REACT #
-## Creating a React Application with Meteor. ##
+#LEARNING METEOR AND REACT
+## Creating a React Application with Meteor.##
 
-->Project Name
- --> .meteor
- --> client (all code that is executed in the browser)
- --> node_modules
- --> .gitignore
+->Project Name \n
+ --> .meteor \n
+ --> client (all code that is executed in the browser) \n
+ --> node_modules \n
+ --> .gitignore \n
  --> package.json
 
 ###ReactJS Vs. Meteor###
