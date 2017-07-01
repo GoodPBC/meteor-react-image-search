@@ -4,10 +4,20 @@ import React from 'react';
 
 
 //CREATE OUR IMAGE LIST component
-const ImageDetail = () => {
+//we are now recieving the props from ImageList
+const ImageDetail = (props) => {
+  //props.image -->  this is the image object
   return (
     <div>
-      <h3>Image Detail</h3>
+      <img src={props.image.link} />
+      <br />
+      { props.image.title }
+      <br />
+      <br />
+      { props.image.detail }
+      <br />
+      <hr />
+      <br />
     </div>
   );
 };

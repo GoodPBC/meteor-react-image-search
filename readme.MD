@@ -69,7 +69,7 @@
 
 *LINK TO PLANNING*
 
-https://www.lucidchart.com/documents/edit/493e38a4-d1c8-445f-901b-4543760ad696#
+See The React Search UI MockUp
 
 ###Create a components folder in client for your React component. ###
 *Remember everything in client folder is  what will  be rendered*
@@ -78,7 +78,7 @@ https://www.lucidchart.com/documents/edit/493e38a4-d1c8-445f-901b-4543760ad696#
 2.  image detail
 3.  Voting
 
-*Remember, everytime we create a React component we need to do 3 things*
+*Remember, every time we create a React component we need to do 3 things*
 1.  import our libraries
 2.  Create our component. either functional or class based
  *note --> functional components are stateless, "unaware" of change around them.*
@@ -112,6 +112,27 @@ https://www.lucidchart.com/documents/edit/493e38a4-d1c8-445f-901b-4543760ad696#
     );
   };
 ```
-2. Instead of returning ImageDetail we replace it with RenderedImages because after we map over the IMAGES object RenderedImages becomes a new array which is an array of all of our ImageDetail components. This is how we solve the problem of rendering multiple components in a list
-###
-**
+2. Instead of returning ImageDetail we replace it with RenderedImages because after we map over the IMAGES object RenderedImages becomes a new array which is an array of all of our ImageDetail components. This is how we solve the problem of rendering multiple components in a list.
+
+###Now we need to figure out a way to to communicate the information that our "image" argument now holds and get it into our <ImageDetail /> in an organized way. This will cause us to have to customize image detail.
+
+*Here we will use props. Props is any data that is passed from a parent to a child. to pass props from parent to child we have to add it to the tag*
+
+```const ImageList = () => {
+    const RenderedImages = IMAGES.map(function(image) {
+      return <ImageDetail image={image} />
+    });
+
+    return (
+      <ul>
+        { RenderedImages }
+      </ul>
+    );
+  };
+```
+
+*Notice that we add our image prop into the ImageList component and then we pass the prop to the ImageDetail component by referencing our prop.image.title. THIS IS HOW WE PASS DATA TO A COMPONENT*
+
+### MORE ON props
+
+*for our image list we need to pass particular Image from ImageList  information to each component and render it in the image list.*
