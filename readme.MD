@@ -93,8 +93,25 @@ https://www.lucidchart.com/documents/edit/493e38a4-d1c8-445f-901b-4543760ad696#
 
 *create an array of objects for the images*
 
-###
-**
+*use dummyimage.com to create placeholders*
 
+###Now we need to create a way for our images to each get into a separate ImageDetail component. This will happen in ImageList component.
+
+*It will be a two step process*
+1.  Write a variable inside the ImageList component for images. We make this variable equal to a function that uses the map method to iterate through our IMAGES object. Map, loops through
+
+```const ImageList = () => {
+    const RenderedImages = IMAGES.map(function(image) {
+      return <ImageDetail />
+    });
+
+    return (
+      <ul>
+        { RenderedImages }
+      </ul>
+    );
+  };
+```
+2. Instead of returning ImageDetail we replace it with RenderedImages because after we map over the IMAGES object RenderedImages becomes a new array which is an array of all of our ImageDetail components. This is how we solve the problem of rendering multiple components in a list
 ###
 **

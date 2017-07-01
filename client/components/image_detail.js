@@ -6,9 +6,9 @@ import React from 'react';
 //CREATE OUR IMAGE LIST component
 const ImageDetail = () => {
   return (
-    <ul>
-      <li>Image Detail</li>
-    </ul>
+    <div>
+      <h3>Image Detail</h3>
+    </div>
   );
 };
 

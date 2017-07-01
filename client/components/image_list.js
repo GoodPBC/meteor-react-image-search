@@ -3,7 +3,7 @@
 import React from 'react';
 import ImageDetail from './image_detail';
 
-//static data source for our images
+//static data source for our dummy images
 const IMAGES = [
   {title: 'Joe', link: 'https://dummyimage.com/200x150/00bbf5/000.jpg&text=image'},
   {title: 'Aleks', link: 'https://dummyimage.com/200x150/00bbf5/000.jpg&text=image'},
@@ -13,9 +13,12 @@ const IMAGES = [
 ]
 //CREATE OUR IMAGE LIST component
 const ImageList = () => {
+  const RenderedImages = IMAGES.map(function(image) {
+    return <ImageDetail />
+  });
   return (
     <ul>
-      <ImageDetail />
+      { RenderedImages }
     </ul>
   );
 };
