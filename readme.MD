@@ -83,12 +83,15 @@ https://www.lucidchart.com/documents/edit/493e38a4-d1c8-445f-901b-4543760ad696#
 2.  Create our component. either functional or class based
  *note --> functional components are stateless, "unaware" of change around them.*
 3.  Export our components with the export default statement
-###When we get down to the image detail component we need to start thinking about our data source. 
+###When we get down to the image detail component we need to start thinking about our data source.
 
 *Before building a dynamic data source we will build a static list of images to give our image detail component*
 
-###
-**
+###Building a static list of images for our application
+
+*In our image list file we are going to create a dummy list of images. each images is going to be an object that has a title and a link*
+
+*create an array of objects for the images*
 
 ###
 **
