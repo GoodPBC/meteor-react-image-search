@@ -184,3 +184,5 @@ command. it takes a moment*
    );
 ```
 *we remove the return keyword and the curly braces*
+
+###Getting dyamic images into our application using the Imgur API
