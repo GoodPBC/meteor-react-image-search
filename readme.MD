@@ -131,8 +131,56 @@ See The React Search UI MockUp
   };
 ```
 
-*Notice that we add our image prop into the ImageList component and then we pass the prop to the ImageDetail component by referencing our prop.image.title. THIS IS HOW WE PASS DATA TO A COMPONENT*
+*Notice that we add our image prop ("image={image}")into the ImageList component and then we pass the prop to the ImageDetail component by referencing our "prop.image.title". THIS IS HOW WE PASS DATA TO A COMPONENT*
 
 ### MORE ON props
 
-*for our image list we need to pass particular Image from ImageList  information to each component and render it in the image list.*
+*for our image list we need to pass particular image from ImageList  information to each component and render it in the image list. Here we use the "props.image.link" and use the prop as the img src.*
+
+*By now you should have somthing that looks like the react-image-searchUI-unstyled.jpg that is in this project. it will look even more basic than that as that is already slightly styled*
+
+### Styling our components  & the Meteor package manager.
+
+*In order to take advantage of frameworks we can pull them into tour meteor project using the packages that are available to install at https://atmospherejs.com/ . These packages are installed via the command line and all have documentation and github repos to help you work with and implement the packages.*
+
+*To style our components we are going to use materialize, which is a responsive front end framework that is based on googles material design*
+
+*we install it via the command line using the "meteor add materialize:materialize"
+command. it takes a moment*
+
+*name we have materialize's front end framework available to us to begin to style our components*
+
+####In react we reference our components with "ClassName" instead of class. The reason for this is that in VanillaJS as of ecmaScript 2016, class is a reserved word in javascript.
+
+*We will take advantage of the predefined style rules that are available to the class's in materialize. We will use collection and collection-item to style our list and we can also use img classes as well. feel free to play around here*
+
+###Key props in lists
+
+*"Warning: Each child in an array or iterator should have a unique "key" prop. Check the render method of `ImageList`."*
+
+*so RenderedImages is our array of ImageDetail components. Whenever we render an array of components in react,React expects that its going to have a key property available on each of the components in the array. This is strictly for performance. it makes it easier for react to render lists of items when the key property is available. We Need to add a prop to image detail to remove this warning.*
+
+*To create a key prop you have assign a key that will be unique to each component in the array. Here we are going to use the title because, for our purposes, the title will be unique for each image in our list.*
+
+##BONUS
+
+*we are going to refactor our function for RenderedImages to make it a fat arrow function*
+
+```const ImageList = () => {
+  const RenderedImages = IMAGES.map(function(image) {
+    return <ImageDetail key={image.title} image={image} />
+});
+```
+
+*can be refactored in two ways to be more current for es6*
+1.  We can make use of a fat arrow function and since there is only one argument (image) in our function we can remove the parenthesis around it:
+ ```const RenderedImages = IMAGES.map(image => {
+        return <ImageDetail key={image.title} image={image} />
+  });
+```
+2.  We can use an "implicit return". This mean that we don't have to use the return statement if we do not want to. When we have a single element our a single JS expression, we can use implicit returns. it is optional and is purely syntactic sugar. It looks like this:
+```const RenderedImages = IMAGES.map(image =>
+       <ImageDetail key={image.title} image={image} />
+   );
+```
+*we remove the return keyword and the curly braces*

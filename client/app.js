@@ -10,8 +10,8 @@ const App = () => {
     </div>
   )
 }
-
-Meteor.startup( () =>{  //method from meteor that allows us to wait till loaded
+//anyhting inside of this function will be fired after our app has loaded
+Meteor.startup( () =>{
   //render a component
   //<App /> is an instance of the App component that we just created
   ReactDOM.render(<App />, document.querySelector('.container'));  //use the react dom library--to render--the app component -- to some HTML element with class container

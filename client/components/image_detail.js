@@ -8,13 +8,18 @@ import React from 'react';
 const ImageDetail = (props) => {
   //props.image -->  this is the image object
   return (
-    <li className="">
-      <img src={props.image.link} className="circle img-responsive" />
-      <br />
-      { props.image.title }
-      <br />
-      <br />
-      { props.image.detail }
+    <li className="collection-item">
+      <div className="">
+        <img src={props.image.link} className="circle img-responsive materialboxed" />
+      </div>
+      <div className="">
+        <h3>
+          { props.image.title }
+        </h3>
+      </div>
+      <div className="">
+        { props.image.detail }
+      </div>
     </li>
   );
 };
