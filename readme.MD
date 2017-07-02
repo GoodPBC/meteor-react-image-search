@@ -186,3 +186,8 @@ command. it takes a moment*
 *we remove the return keyword and the curly braces*
 
 ###Getting dyamic images into our application using the Imgur API
+
+*this is our endpoint that we will use from IMGUR's API*
+*https://api.imgur.com/3/gallery/hot/viral/0.json*
+
+*we need to install the axios package fron npm in order to make AJAX requests npm install axios --save*
