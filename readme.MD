@@ -13,7 +13,7 @@
 ##React takes our data and produces HTML with it. It also handles our user events##
 ###A Meteor Project gives us:###
       1.  a webdev server
-      2.  A place to put
+      2.  A place to put our code
       3.  A place to track project dependencies
 
 ### *Install Meteor* --MAC ONLY
@@ -31,25 +31,25 @@
 ### *Install React into your Project*
 *"npm i --save react"*
 *You should now have a node_modules folder. this is where your dependencies are*
-*using the --save command will save the dependency toyour pakcage.json file*
+*using the --save command will save the dependency to your pakcage.json file*
 *meteor-node-stubs dependency is given to us by default by meteor*
 
 
 ### Create a client folder
-*in the folder create (touch) an index.html file*
+*Delete the initial client folder and re-create it. In the folder create (touch) an index.html file*
 #### It is important to note that anything we place in the client folder will run when a client visits our server at port 3000 ####
 
 ### Get React into our project
 *we need to create a javascript file in the client folder. this we will call index.js*
 
 *Test that your file works.
- console.log a hello world message in the file so that we can make sure we are talking to the client. you should see your message in the console*
+ "console.log" a hello world message in the file so that we can make sure we are talking to the client. you should see your message in the console*
 
 *We need to import react library into our project. es6 allows us to import full modules,parts of a module, functions, objects and more *
 
-*We will import React from 'react'; We will also need to import ReactDOM*
+*We will use an import statement "import React from 'react'"; We will also need an import statement for ReactDOM*
 
-*We create a functional component using es6's const*
+*We create a functional react component using es6's const* *A functional react component is a not aware of its state. it is a basic / static component that is also known as a stateless component.
 
 *We render the component using ReactDOM.render, but we put it inside the Meteor.startup method in order to all the DOM to load first*
 
@@ -81,7 +81,7 @@ See The React Search UI MockUp
 *Remember, every time we create a React component we need to do 3 things*
 1.  import our libraries
 2.  Create our component. either functional or class based
- *note --> functional components are stateless, "unaware" of change around them.*
+ *note --> remember **functional components are stateless, "unaware" of change around them.*
 3.  Export our components with the export default statement
 ###When we get down to the image detail component we need to start thinking about our data source.
 
@@ -137,7 +137,7 @@ See The React Search UI MockUp
 
 *for our image list we need to pass particular image from ImageList  information to each component and render it in the image list. Here we use the "props.image.link" and use the prop as the img src.*
 
-*By now you should have somthing that looks like the react-image-searchUI-unstyled.jpg that is in this project. it will look even more basic than that as that is already slightly styled*
+*By now you should have somtehing that looks like the react-image-searchUI-unstyled.jpg that is in this project. it will look even more basic than that as that is already slightly styled*
 
 ### Styling our components  & the Meteor package manager.
 
@@ -185,9 +185,46 @@ command. it takes a moment*
 ```
 *we remove the return keyword and the curly braces*
 
-###Getting dyamic images into our application using the Imgur API
+###Getting dynamic images into our application using the Imgur API
 
 *this is our endpoint that we will use from IMGUR's API*
 *https://api.imgur.com/3/gallery/hot/viral/0.json*
 
-*we need to install the axios package fron npm in order to make AJAX requests npm install axios --save*
+*we need to install the axios package from npm in order to make AJAX requests npm install axios --save*
+
+*To test the response we will make our axios request from the _app.js_ file which is fine for testing purposes *
+
+*Now that we have a response object we have to dial in on the information that we want to render in our app*
+
+##Introducing state in react.
+*whenever we are working with data insode of react we want our components to be able to source/fetch its own data a render that data to the screen*
+
+*Here we introduce a Class based component. Class comes from es6's Javascript Classes. Lets look at how we refactor a functional component to a class based component*
+####functional app component
+```const App = () => {
+  return (
+    <div>
+      <ImageList />
+    </div>
+  )
+}
+```
+####Class app component
+```class App extends Component {
+    render(){
+      return (
+        <div>
+          <ImageList />
+        </div>
+      )
+    }  
+   };
+```
+
+*As you can see above we remove the fat arrow function and replace it with a class statement and also create a render method which is executed whenever the component needs to be rendered to the screen*
+*We also need to destructure the React library and bring in our Component class from React by using a destructured import statement*
+
+###Loading data with lifecycle methods
+*another method we have access to state aware components in react is componentWillMount "componentWillMount(){ console.log('ayyy')};"*
+
+*This is a method that allows the component to be aware of when it will be rendered and do something before it renders*
