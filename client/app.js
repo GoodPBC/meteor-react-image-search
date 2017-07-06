@@ -22,5 +22,5 @@ Meteor.startup( () =>{
   axios.get('https://api.imgur.com/3/gallery/hot/viral/0')
   .then(response => console.log(response));
 
-
+  
 });
