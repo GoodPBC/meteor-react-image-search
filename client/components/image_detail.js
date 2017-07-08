@@ -13,12 +13,14 @@ const ImageDetail = (props) => {
         <img src={props.image.link} className=" img-responsive materialboxed" />
       </div>
       <div className="">
-        <h3>
+        <h4>
           { props.image.title }
-        </h3>
+        </h4>
       </div>
       <div className="">
-        { props.image.detail }
+        <p className="flow-text">
+         { props.image.description}
+        </p>
       </div>
     </li>
   );
