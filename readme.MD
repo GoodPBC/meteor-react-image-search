@@ -364,7 +364,7 @@ render() {
 *Post CleanUp:*
 ```const ImageList =() => {
     const validImages = props.images.filter(image => !image.is_album);
-    const RenderedImages = validImages(image =>
+    const RenderedImages = validImages.map(image =>
       <ImageDetail key={image.title} image={image} />
     );
 
@@ -377,4 +377,11 @@ render() {
 ```
 
 *so what we did was use the array filter method on our validImages const that we created. filter is just like map except if we return false on filter*
-*so for each image we do not wnat to include it if it is an album. Instead of mapping of *
+*so for each image we do not want to include it if it is an album. Instead of mapping of*
+
+###Now we will move on to getting our image description into the Application
+*We need to add the description IN THE ImageDetail Component. you will notice that reference to description is not in every image that is because not every image has a description we reference description in ImageDetail by accessing "props.image.descrition" remember the ImageDetail component creates one image rendered per instance. Image List creates a n array of imageDetail components.*
+
+###Lets move on to creating an image Score
+
+*we create our ImageVotes component with our component boiler plate.*
