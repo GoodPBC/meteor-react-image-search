@@ -249,10 +249,10 @@ command. it takes a moment*
     }
   };```
 ```
-2. *The is a class based component that takes advantage of state. Notice we ad a constructor method to our class. The constructor method is special method available to us in the JS class. when ever a class is instantiated the constructor method is automatically called. when it is called in React it will be called with the props object. props is passed from component to component.*
-*The component class that we are extending from which is implemented by React, has its own special implementation and configuration that it does inside of its own constructor. We call this parent constructor by calling super(props)*
+2. *The is a class based component that takes advantage of state. Notice we ad a constructor method to our class. The constructor method is special method available to us in the JS class. when ever a class is instantiated the constructor method is automatically called. when it is called in React it will be called with the props object. exact same props that is passed from component to component.*
+*The component class that we are extending from which is implemented by React, has its own special implementation and configuration that it does inside of its own constructor. We call this parent constructor by calling "super(props)" --> not something we need to worry about to much*
 
-*"this.state = { some: object};" initializes our state. our state object can have multiple properties. here we only have one. we always initialize our state to some reasonable value. Here we can expect that our state will be an array that is a response from our axios.*
+*"this.state = { some: object};" initializes our state. our state object can have multiple properties. here we only have one. we always initialize our state to some reasonable value. Here we can expect that our state will be an array that is a response from our axios. In this case the response from the serveris going to be an array of images. That is why we init state as an empty array. When our request gets resolved it will now have some data. We only ever make reference to our state by saying "this.state ={key: value}". The reason we are using state is to forcibly re-render our component and all of its children when our request has completed.*
 ```class App extends Component {
   constructor(props) {
     super(props)
@@ -261,10 +261,11 @@ command. it takes a moment*
   }
   componentWillMount() { //great place to load data
     axios.get('https://api.imgur.com/3/gallery/hot/viral/0')
-    .then(response => this.setState({ images: response.data.data }));
+    .then(response => this.render()));
   }
 
   render() {
+    console.log(this.state.images);
     return (
       <div>
         <ImageList />
@@ -274,4 +275,106 @@ command. it takes a moment*
 };
 ```
 
-*We will do some debugging by console.log 'ing our state in our render method - what happens? --> we should get back an empty array*  
+*We will do some debugging by console.log 'ing our state in our render method - what happens? --> we should get back 2 empty arrays. one from the this.render that we should not be using and one from our console.log(this.state.images)*
+
+###Making state work
+```componentWillMount() { //great place to load data
+  axios.get('https://api.imgur.com/3/gallery/hot/viral/0')
+  .then(response => this.setState({ images: response.data.data }));
+  ```  
+*TO get a response back from our API that has data in it we will replace this.render in the response we call "this.setState" of images to the the response body of our axios API call which is response.data.data....Now we should be getting two renders one empty and one that has called with setState and has a list of images.*
+
+
+_The only time we ever use an "=" to determine state is when we are instantiating it inside of the constructor function. The rest of the times we use the setState method to update state._
+
+###Passing Images as props
+*We are still using a static list of images but our app.js is grabbing images dynamically from our API. So know we need to find a way to pass that data from our "parent" App component to our "child" the ImageList. whenever we want to talk from parent to child we use props. WHENEVER WE WANT TO PASS DATA FROM A PARENT TO A CHILD WE WILL ADD IT AS A PROP TO THE CHILD TAG In this case "images={this.state.images}" will go inside our imageList tag in the App component.like so:*
+
+render() {
+  return(
+    <div>
+      <ImageList images={ this.state.images } />
+    </div>  
+  );
+
+
+*Now our ImageList is being passed a prop called images and thte data is coming from this.state.images.*
+
+###Note that we instantiated our images state to be an empty array.
+*That means the images prop when it shows up to imageList is always going to be an array. that means we can perform operations on it like map, length etc...*
+
+*Lets clean up imageList*
+*Pre CleanUp:*
+```const ImageList =() => {
+    const RenderedImages = IMAGES.map(image =>
+      <ImageDetail key={image.title} image={image} />
+    );
+
+    return (
+        <ul>
+          {RenderedImages}
+        </ul>  
+    );
+};
+```
+
+*Post CleanUp:*
+```const ImageList =() => {
+    const RenderedImages = props.images.map(image =>
+      <ImageDetail key={image.title} image={image} />
+    );
+
+    return (
+        <ul>
+          {RenderedImages}
+        </ul>  
+    );
+};
+```
+
+###What we did to refactor ImageList
+*Instead of const images we want to grab the data on the props object that is given to us in every functional component by React. lets update and see what happens*
+
+###Okay so we have some broken images
+*We successfully got our images to render but we go a lot of broken images*
+1. go to console and open Network tab.
+2. navigate to XHR which will show us any ajax requests
+3. click the 0 line -this is our ajax requests
+4. click preview tab to find the data that we got from our request.
+5. find the broken link
+  *is_album: true*
+
+*we need to refactor our what we are showing in our response to get rid of albums. so we need to create a filter. We need to create a new variable that will do some preprocessing for us*
+
+*Lets clean up imageList*
+*Pre CleanUp:*
+```const ImageList =() => {
+    const RenderedImages = props.images.map(image =>
+      <ImageDetail key={image.title} image={image} />
+    );
+
+    return (
+        <ul>
+          {RenderedImages}
+        </ul>  
+    );
+};
+```
+
+*Post CleanUp:*
+```const ImageList =() => {
+    const validImages = props.images.filter(image => !image.is_album);
+    const RenderedImages = validImages(image =>
+      <ImageDetail key={image.title} image={image} />
+    );
+
+    return (
+        <ul>
+          {RenderedImages}
+        </ul>  
+    );
+};
+```
+
+*so what we did was use the array filter method on our validImages const that we created. filter is just like map except if we return false on filter*
+*so for each image we do not wnat to include it if it is an album. Instead of mapping of *

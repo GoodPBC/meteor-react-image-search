@@ -27,7 +27,7 @@ import ImageDetail from './image_detail';
 const ImageList = (props) => {
   const validImages = props.images.filter(image => !image.is_album);
 
-  //refactored with fat arrow and impicit return
+  //refactored with fat arrow and impicit return and to include validImages preprocessor
   const RenderedImages = validImages.map(image =>
     <ImageDetail key={image.title} image={image} />
   );
