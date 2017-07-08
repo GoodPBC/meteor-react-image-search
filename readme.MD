@@ -1,17 +1,19 @@
 #LEARNING METEOR AND REACT
 ## Creating a React Application with Meteor.##
 
-###->Project Name
+###Project Name
 #### --> .meteor
 #### --> client (all code that is executed in the browser) \n
 #### --> node_modules
 #### --> .gitignore
 #### --> package.json
 
-###ReactJS Vs. Meteor###
-## Meteor will Keep track of the the data in our application##
-##React takes our data and produces HTML with it. It also handles our user events##
-###A Meteor Project gives us:###
+###ReactJS Vs. Meteor
+## Meteor will Keep track of the the data in our application
+
+###React takes our data and produces HTML with it. It also handles our user events
+
+###A Meteor Project gives us:
       1.  a webdev server
       2.  A place to put our code
       3.  A place to track project dependencies
@@ -37,7 +39,7 @@
 
 ### Create a client folder
 *Delete the initial client folder and re-create it. In the folder create (touch) an index.html file*
-#### It is important to note that anything we place in the client folder will run when a client visits our server at port 3000 ####
+#### It is important to note that anything we place in the client folder will run when a client visits our server at port 3000
 
 ### Get React into our project
 *we need to create a javascript file in the client folder. this we will call index.js*
@@ -53,7 +55,9 @@
 
 *We render the component using ReactDOM.render, but we put it inside the Meteor.startup method in order to all the DOM to load first*
 
-###Congratulations you have just made a React component in Meteor
+
+###Congratulations you have just made a React component in Meteor.
+
 
 *Lets Move on to a bigger project*
 
@@ -71,7 +75,8 @@
 
 See The React Search UI MockUp
 
-###Create a components folder in client for your React component. ###
+###Create a components folder in client for your React component.
+
 *Remember everything in client folder is  what will  be rendered*
 *we will then create our components*
 1.  image list
@@ -83,6 +88,7 @@ See The React Search UI MockUp
 2.  Create our component. either functional or class based
  *note --> remember **functional components are stateless, "unaware" of change around them.*
 3.  Export our components with the export default statement
+
 ###When we get down to the image detail component we need to start thinking about our data source.
 
 *Before building a dynamic data source we will build a static list of images to give our image detail component*
@@ -98,6 +104,7 @@ See The React Search UI MockUp
 ###Now we need to create a way for our images to each get into a separate ImageDetail component. This will happen in ImageList component.
 
 *It will be a two step process*
+
 1.  Write a variable inside the ImageList component for images. We make this variable equal to a function that uses the map method to iterate through our IMAGES object. Map, loops through
 
 ```const ImageList = () => {
@@ -114,7 +121,7 @@ See The React Search UI MockUp
 ```
 2. Instead of returning ImageDetail we replace it with RenderedImages because after we map over the IMAGES object RenderedImages becomes a new array which is an array of all of our ImageDetail components. This is how we solve the problem of rendering multiple components in a list.
 
-###Now we need to figure out a way to to communicate the information that our "image" argument now holds and get it into our <ImageDetail /> in an organized way. This will cause us to have to customize image detail.
+###Using Props to transfer dat from image to ImageDetail
 
 *Here we will use props. Props is any data that is passed from a parent to a child. to pass props from parent to child we have to add it to the tag*
 
