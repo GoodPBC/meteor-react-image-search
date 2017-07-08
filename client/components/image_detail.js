@@ -10,7 +10,7 @@ const ImageDetail = (props) => {
   return (
     <li className="collection-item">
       <div className="">
-        <img src={props.image.link} className="circle img-responsive materialboxed" />
+        <img src={props.image.link} className=" img-responsive materialboxed" />
       </div>
       <div className="">
         <h3>
