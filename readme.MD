@@ -227,4 +227,51 @@ command. it takes a moment*
 ###Loading data with lifecycle methods
 *another method we have access to state aware components in react is componentWillMount "componentWillMount(){ console.log('ayyy')};"*
 
-*This is a method that allows the component to be aware of when it will be rendered and do something before it renders*
+*This is a method that allows the component to be aware of when it will be rendered and do something before it renders. This make it a great place for our Axios call to happen. as soon as the "componentWillMount" method is called,  the ajax call fires and we get our data. this presents a challenge though because the very next millisecond React will call the render method and the call may not be complete yet. In order to correct this we have to work with STATE*
+
+###Using state in React
+*State is property that every class based component that we create has access to. state is a JS object that we can make changes to.When ever we change the state object the component will automatically re-render that component and all of its children*
+
+*Lets figure out how to use state inside a React component*
+1. The following app component is a class based component w/o state
+```class App extends Component {
+    componentWillMount() { //great place to load data
+      axios.get('https://api.imgur.com/3/gallery/hot/viral/0')
+      .then(response => console.log(response));
+    }
+
+    render() {
+      return (
+        <div>
+          <ImageList />
+        </div>
+      );
+    }
+  };```
+```
+2. *The is a class based component that takes advantage of state. Notice we ad a constructor method to our class. The constructor method is special method available to us in the JS class. when ever a class is instantiated the constructor method is automatically called. when it is called in React it will be called with the props object. props is passed from component to component.*
+*The component class that we are extending from which is implemented by React, has its own special implementation and configuration that it does inside of its own constructor. We call this parent constructor by calling super(props)*
+
+*"this.state = { some: object};" initializes our state. our state object can have multiple properties. here we only have one. we always initialize our state to some reasonable value. Here we can expect that our state will be an array that is a response from our axios.*
+```class App extends Component {
+  constructor(props) {
+    super(props)
+
+    this.state = { images: [] };
+  }
+  componentWillMount() { //great place to load data
+    axios.get('https://api.imgur.com/3/gallery/hot/viral/0')
+    .then(response => this.setState({ images: response.data.data }));
+  }
+
+  render() {
+    return (
+      <div>
+        <ImageList />
+      </div>
+    );
+  }
+};
+```
+
+*We will do some debugging by console.log 'ing our state in our render method - what happens? --> we should get back an empty array*  
