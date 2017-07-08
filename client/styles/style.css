@@ -10,3 +10,33 @@ div.progress {
   height: 25px;
   width: 90%;
 }
+a.upVote {
+  text-decoration: none;
+  color: #4CAF50;
+  background-color: #ecf0f1;
+  border: 1px dashed #2196f3;
+  border-radius: 100%;
+  padding: 4px;
+  margin-bottom: 3px;
+}
+a.downVote {
+  text-decoration: none;
+  color: #F44336;
+  background-color: #ecf0f1;
+  border: 1px dashed #2196f3;
+  border-radius: 100%;
+  padding: 4px;
+  margin-bottom: 3px;
+  margin-top: 0px;
+}
+div.flow-text.col.s1 {
+ margin-bottom: 0px;
+}
+
+.row.thumbsVote {
+  margin-top: 0px;
+}
+
+.row.voteTally {
+  margin-bottom: 0px;
+}

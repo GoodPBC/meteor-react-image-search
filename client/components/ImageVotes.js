@@ -22,9 +22,13 @@ const ImageScore = (props) => {
         <div style={{width: upPercent}} className="determinate green"></div>
         <div style={{width: downPercent}} className="determinate red"></div>
       </div>
-      <div className="row">
-        <div className="flow-text col s6"><span><i className="material-icons">trending_up</i></span> { upNum }</div>
-        <div className="flow-text col s6"><span><i className="material-icons">trending_down</i></span> { downNum }</div>
+      <div className="row voteTally">
+        <div className="flow-text col s1"><p className="flow-text">{ downNum }</p></div>
+      <div className="flow-text col s1"><p className="flow-text">{ upNum }</p></div>
+      </div>
+      <div className="row thumbsVote">
+        <div className="flow-text col s1"><span><i className="material-icons"><a className="downVote">thumb_down</a></i></span></div>
+        <div className="flow-text col s1"><span><i className="material-icons"><a className="upVote">thumb_up</a></i></span></div>
       </div>
     </div>
   )
